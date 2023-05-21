@@ -19,6 +19,7 @@ namespace Niusys.Docs.Core.ProjectHttpClients
                     type = typeof(GitlabDocProjectHttpClient);
                     break;
                 case HostType.Github:
+                    type = typeof(GithubDocProjectHttpClient);
                     break;
                 default:
                     break;
