@@ -1,0 +1,6 @@
+@using Niusys.Docs.Core.Projects;
+@model List<DocProject>
+@foreach (var item in Model)
+{
+    <a class="dropdown-item" href="@Url.Content($"~/{item.RequestPath}")">@item.Name</a>
+}

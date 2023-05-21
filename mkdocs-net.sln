@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{990DB888-9DB1-4CA8-BE9F-EF7061CAED6E}"
+	ProjectSection(SolutionItems) = preProject
+		.drone.yml = .drone.yml
+		.gitignore = .gitignore
+		global.json = global.json
+		NuGet.config = NuGet.config
+		README.MD = README.MD
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Feinian.Mkdocs.Web", "backend\Feinian.Mkdocs.Web\Feinian.Mkdocs.Web.csproj", "{B5538D30-C057-485C-BFA1-7BAA3D716980}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Feinian.Mkdocs.Core", "backend\Feinian.Mkdocs.Core\Feinian.Mkdocs.Core.csproj", "{CE89E7C6-5E98-4EE8-B428-157C997ECED0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5538D30-C057-485C-BFA1-7BAA3D716980}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5538D30-C057-485C-BFA1-7BAA3D716980}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5538D30-C057-485C-BFA1-7BAA3D716980}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5538D30-C057-485C-BFA1-7BAA3D716980}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE89E7C6-5E98-4EE8-B428-157C997ECED0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE89E7C6-5E98-4EE8-B428-157C997ECED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE89E7C6-5E98-4EE8-B428-157C997ECED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE89E7C6-5E98-4EE8-B428-157C997ECED0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {36479376-FD84-4BA2-98A1-AAF69AAC29A8}
+	EndGlobalSection
+EndGlobal

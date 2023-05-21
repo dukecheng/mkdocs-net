@@ -1,0 +1,12 @@
+@using Niusys.Docs.Core.Projects;
+@model List<DocProject>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li><a href="@Url.Content($"~/{item.RequestPath}")">@item.Name</a></li>
+    }
+</ul>

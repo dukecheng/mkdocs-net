@@ -1,0 +1,87 @@
+  <!-- ========== HEADER ========== -->
+<header id="header" class="navbar navbar-expand-lg navbar-light bg-white">
+    <nav class="navbar-topbar d-none">
+        <div class="container-fluid">
+            <!-- Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topbarNavbar" aria-controls="topbarNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="d-flex justify-content-between align-items-center">
+                    <span class="me-2">Topbar</span>
+                    <span class="navbar-toggler-default">
+                        <i class="bi-chevron-down"></i>
+                    </span>
+                    <span class="navbar-toggler-toggled">
+                        <i class="bi-chevron-up"></i>
+                    </span>
+                </span>
+            </button>
+            <!-- End Toggler -->
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="topbarNavbar">
+                <div class="navbar-topbar-collapse-toggler">
+                    <span class="navbar-topbar-toggler-text">Topbar</span>
+
+                    <!-- Toggler -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topbarNavbar" aria-controls="topbarNavbar" aria-expanded="true" aria-label="Toggle navigation">
+                        <i class="bi-x"></i>
+                    </button>
+                    <!-- End Toggler -->
+                </div>
+
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Settings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">English (US)</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- End Collapse -->
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <nav class="navbar-nav-wrap">
+            <!-- Default Logo -->
+            <a class="navbar-brand" href="~/" aria-label="Unify">
+                <img class="navbar-brand-logo" src="~/assets/svg/logos/logo.svg" alt="Image Description">
+            </a>
+            <!-- End Default Logo -->
+            <!-- Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-default">
+                    <i class="bi-list"></i>
+                </span>
+                <span class="navbar-toggler-toggled">
+                    <i class="bi-x"></i>
+                </span>
+            </button>
+            <!-- End Toggler -->
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav nav-pills">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownSubMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">项目</a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownSubMenu" style="min-width: 230px;">
+                            @await Component.InvokeAsync("MarkdownHeader")
+                        </div>
+                    </li>          
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/admin/" role="button" aria-expanded="false">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/jobs/" role="button" aria-expanded="false">Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/swagger/" role="button" aria-expanded="false">API</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- End Collapse -->
+        </nav>
+    </div>
+</header>
+<!-- ========== END HEADER ========== -->

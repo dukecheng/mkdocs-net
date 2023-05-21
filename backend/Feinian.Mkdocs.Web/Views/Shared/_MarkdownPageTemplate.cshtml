@@ -1,0 +1,95 @@
+@using Niusys.Docs.Web.Components;
+@model MarkdownModel
+@{
+    Layout = "_Layout";
+    var model = ViewContext.HttpContext.Items["MarkdownProcessor_Model"] as MarkdownModel;
+    var defaultActivePath = $"{model.DocProject.RequestPath}/{model.RelativePath}";
+}
+@section Headers {
+    <style type="text/css">
+        .primary-holder img {
+            max-width: 100%;
+        }
+
+        .primary-holder code {
+            font-size: 14px;
+        }
+    </style>
+}
+<!-- ========== MAIN CONTENT ========== -->
+<div class="main-wrapper row">
+    <div class="left-container col-3 col-lg-2">
+        @await Component.InvokeAsync("NavMenu")
+    </div>
+    <div class="primary-holder col-7 col-lg-8">
+        @Model.RenderedMarkdown
+    </div>
+    <div class="right-container col-md-2 d-sm-none d-md-block">
+        <!-- Nav -->
+        <ul class="nav nav-segment" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="nav-one-eg1-tab" href="#nav-one-eg1" data-bs-toggle="pill" data-bs-target="#nav-one-eg1" role="tab" aria-controls="nav-one-eg1" aria-selected="true">Tags</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="nav-two-eg1-tab" href="#nav-two-eg1" data-bs-toggle="pill" data-bs-target="#nav-two-eg1" role="tab" aria-controls="nav-two-eg1" aria-selected="false">Branches</a>
+            </li>
+        </ul>
+        <!-- End Nav -->
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="nav-one-eg1" role="tabpanel" aria-labelledby="nav-one-eg1-tab">
+                @await Component.InvokeAsync("ViewList",new{viewMode=ViewMode.Tag})
+            </div>
+
+            <div class="tab-pane fade" id="nav-two-eg1" role="tabpanel" aria-labelledby="nav-two-eg1-tab">
+                @await Component.InvokeAsync("ViewList",new{viewMode=ViewMode.Branch})
+            </div>
+        </div>
+        <!-- End Tab Content -->
+    </div>
+</div>
+<!-- ========== END MAIN CONTENT ========== -->
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            logLevel: "error"
+        });
+        mermaid.parseError = function (err, hash) {
+            window.console.error(err);
+        };
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs2015.min.css" rel="stylesheet" />
+    <script>
+        setTimeout(function () {
+            var pres = document.querySelectorAll("pre>code");
+            for (var i = 0; i < pres.length; i++) {
+                hljs.highlightBlock(pres[i]);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            NavTree.createBySelector(".nav-tree", {
+                searchable: true,
+                showEmptyGroups: true,
+
+                groupOpenIconClass: "bi",
+                groupOpenIcon: "bi-chevron-down",
+
+                groupCloseIconClass: "bi",
+                groupCloseIcon: "bi-chevron-right",
+
+                linkIconClass: "bi",
+                linkIcon: "bi-link",
+
+                searchPlaceholderText: "Search",
+
+                iconPlace: "start",
+                defaultUrl: "@defaultActivePath"
+            });
+        });
+    </script>
+}

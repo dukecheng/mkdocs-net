@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>@ViewData["Title"]</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/favicon.ico" asp-append-version="true">
+
+    <!-- Font -->
+  @*  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">*@
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="~/assets/css/vendor.min.css" asp-append-version="true">
+
+    <!-- CSS Unify Template -->
+    <link rel="stylesheet" href="~/assets/css/theme.min.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/site.css" asp-append-version="true">
+    @await RenderSectionAsync("Headers", required: false)
+</head>
+
+<body>
+    @await Html.PartialAsync("_Header")
+
+    <main id="content" role="main">
+        @RenderBody()
+    </main>
+    @await Html.PartialAsync("_Footer")
+
+    <!-- ========== SECONDARY CONTENTS ========== -->
+    <!-- Go To -->
+    <a class="js-go-to go-to position-fixed" href="javascript:;" style="visibility: hidden;" data-hs-go-to-options='{
+       "offsetTop": 700,
+       "position": {
+         "init": {
+           "right": "2rem"
+         },
+         "show": {
+           "bottom": "2rem"
+         },
+         "hide": {
+           "bottom": "-2rem"
+         }
+       }
+     }'>
+        <i class="bi-chevron-up"></i>
+    </a>
+    <!-- ========== END SECONDARY CONTENTS ========== -->
+    <!-- JS Implementing Plugins -->
+    <script src="~/assets/js/vendor.min.js" asp-append-version="true"></script>
+    <!-- JS Unify -->
+    <script src="~/assets/js/theme.min.js" asp-append-version="true"></script>
+    <!-- sitejs -->
+    <script src="~/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,32 @@
+@using System.Net;
+@model List<string>
+@{
+    var model = ViewContext.HttpContext.Items["MarkdownProcessor_Model"] as MarkdownModel;
+    var exceptQueryStrings = new List<string> { "view" };
+    var currentTag = ViewContext.HttpContext.Request.Query["view"].FirstOrDefault();
+}
+<ul class="nav nav-vertical">
+    @foreach (var item in Model)
+    {
+        var HttpContext = ViewContext.HttpContext;
+        var oldQueryString = HttpContext.Request.Query.Where(x => !exceptQueryStrings.Contains(x.Key.ToLower())).ToList();
+        oldQueryString.Add(new KeyValuePair<string, Microsoft.Extensions.Primitives.StringValues>("view", WebUtility.UrlEncode(item)));
+        var uriBuilder = new UriBuilder(HttpContext.Request.Scheme, HttpContext.Request.Host.Host)
+                {
+                    Port = HttpContext.Request.Host.Port ?? -1,
+                    Path = $"{model.RequestBasePath}/{model.RelativePath}",
+                    Query = string.Join("&", oldQueryString.Select(x => $"{x.Key}={x.Value}"))
+                };
+
+
+        var newUrl = uriBuilder.ToString();
+        if (item == currentTag)
+        {
+            <li class="nav-item"><a href="" class="nav-link link-secondary active">@item</a></li>
+        }
+        else
+        {
+            <li class="nav-item"><a class="nav-link link-secondary" href="@Url.Content(newUrl)">@item</a></li>
+        }
+    }
+</ul>

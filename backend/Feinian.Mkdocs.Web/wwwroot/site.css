@@ -1,0 +1,16 @@
+.side-navmenu h1 {
+    font-size: 1.2rem;
+}
+
+.side-navmenu h2 {
+    font-size: 1.0rem;
+    padding-left: 1rem;
+}
+
+.side-navmenu h3 {
+    font-size: 0.9rem;
+    padding-left: 1.5rem;
+    margin-top: 0px;
+    padding-bottom: 0px;
+    border-bottom: 0px;
+}

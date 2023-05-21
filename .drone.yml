@@ -1,0 +1,53 @@
+---
+kind: pipeline
+name: build-pipeline
+type: exec
+node:
+  runner_name: cn-build-01
+
+platform:
+  os: linux
+  arch: amd64
+
+trigger:
+  branch:
+    - master
+  event:
+    - push
+
+steps:
+  - name: build backend apis
+    when:
+      branch:
+        - master
+    environment:
+      HUB_HOST: 
+        from_secret: HUB_HOST
+      HUB_USERNAME: 
+        from_secret: HUB_USERNAME
+      HUB_PASSWORD: 
+        from_secret: HUB_PASSWORD  
+    commands: 
+      - docker run -t --rm --dns=8.8.8.8 -v /data/build_share/dotnet:/root/.dotnet -v /data/build_share/nuget:/root/.nuget -v `pwd`:/src
+        --workdir /src mcr.microsoft.com/dotnet/sdk:7.0 bash -c "dotnet publish backend/Feinian.Mkdocs.Web/Feinian.Mkdocs.Web.csproj -c Release -o ./backend/Feinian.Mkdocs.Web/obj/Docker/publish"
+
+      # 输出版本号
+      - export IMAGE_VERSION=$(date +'%y%m%d_%H%M%S')
+      - echo $${IMAGE_VERSION} > `pwd`/backend/Feinian.Mkdocs.Web/obj/Docker/publish/version.txt
+      - cat `pwd`/backend/Feinian.Mkdocs.Web/obj/Docker/publish/version.txt
+
+      - echo "start build adminweb"
+      # - sed -i "s/REACT_APP_BUILD_VERSION='BLANK'/REACT_APP_BUILD_VERSION='$(date +'%y%m%d_%H%M%S')'/g" `pwd`/adminweb/.env
+      # - docker run --rm --dns=8.8.8.8 -v `pwd`/adminweb:/src -v /data/build_share/.cache:/usr/local/share/.cache -v /data/build_share/.pnpm-store:/data/.pnpm-store --workdir /src
+      #   node:latest /bin/sh -c "node --version && npm i -g pnpm && pnpm install --store-dir=/data/.pnpm-store && pnpm run build"
+      # - export FE_APP_PUBLISH_FULLPATH=`pwd`/backend/Feinian.Mkdocs.Web/obj/Docker/publish/ClientApp/AdminWeb/
+      # - rm -rf $FE_APP_PUBLISH_FULLPATH
+      # - mkdir -p $FE_APP_PUBLISH_FULLPATH
+      # - cp -R `pwd`/adminweb/dist/* $FE_APP_PUBLISH_FULLPATH
+
+      - echo "start build docker image"
+      - docker build -t $HUB_HOST/feinian/mkdocs_net:$IMAGE_VERSION -t $HUB_HOST/feinian/mkdocs_net:latest
+        --file `pwd`/backend/Feinian.Mkdocs.Web/Dockerfile `pwd`/backend/Feinian.Mkdocs.Web/obj/Docker/publish
+      - docker login --username $$HUB_USERNAME --password $$HUB_PASSWORD $$HUB_HOST        
+      - docker push $HUB_HOST/feinian/mkdocs_net:$IMAGE_VERSION
+      - docker push $HUB_HOST/feinian/mkdocs_net:latest
