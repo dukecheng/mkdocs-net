@@ -116,14 +116,7 @@ namespace Niusys.Docs.Web.Controllers
                     var baseUrl = $"{requestSession.HostWithScheme}/{model.RequestBasePath}/{model.RelativePath}";
 
                     content = MarkdownUtilities.FixupMarkdownRelativePaths(content, baseUrl, inhirtQuery);
-                    if (content.IsNotNullOrWhitespace())
-                    {
-                        options.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30);
-                    }
-                    else
-                    {
-                        options.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30);
-                    }
+                    options.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(2);
 
                     return content;
                 }
