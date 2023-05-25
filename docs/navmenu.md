@@ -1,7 +1,8 @@
 # NavMenu
 
-- [支持的功能](./features.md)
+- [功能特色](./features.md)
 - [开始使用](./README.md)
+- [WIP](./WIP.md)
 
 ## 部署
 
