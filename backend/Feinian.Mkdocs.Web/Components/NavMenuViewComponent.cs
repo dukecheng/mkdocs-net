@@ -110,7 +110,7 @@ public class NavMenuViewComponent : ViewComponent
         }
         foreach (var item in rootList.Items)
         {
-        
+
             if (item.UlList == null || !item.UlList.Items.Any())
             {
                 navmenuContent.AppendLine($"<li data-value='{item.Text}'>");
@@ -126,11 +126,11 @@ public class NavMenuViewComponent : ViewComponent
                 navmenuContent.AppendLine($"</ul>");
                 navmenuContent.AppendLine("</li>");
             }
-         
+
         }
     }
 
-    public void ListProcess(Block block, UlList root = null, int containerLevel = 0, int headingLevel = 0)
+    public void ListProcess(IMarkdownObject block, UlList root = null, int containerLevel = 0, int headingLevel = 0)
     {
         if (block is ContainerBlock)
         {
@@ -151,6 +151,7 @@ public class NavMenuViewComponent : ViewComponent
             {
                 case "HeadingBlock":
                     var heading = block as HeadingBlock;
+
                     //WrteLog($"{GetLevelSpace(containerLevel)}{GetLevelSpace(heading.Level)}This is a LeafBlock {block.GetType().Name} - {heading.Level}");
                     var headingText = GetHeadingText(heading);
                     root.AddLevelItem(new LiItem() { Text = headingText, Level = heading.Level, UlList = new UlList() }, heading.Level);
@@ -163,16 +164,46 @@ public class NavMenuViewComponent : ViewComponent
                             root.AddItem(new LiItem() { Text = $"Default", Url = headingLink.Url });
                         }
                     }
+
                     break;
                 case "ParagraphBlock":
+
                     var paragraph = block as ParagraphBlock;
-                    var pLink = GetLinks(paragraph);
-                    root.AddItem(new LiItem() { Text = pLink.FirstChild.ToString(), Url = pLink.Url });
+                    foreach (var item in paragraph.Inline)
+                    {
+                        var pLink = GetInlineLinks(item);
+                        if (pLink == null)
+                        {
+                            continue;
+                        }
+                        root.AddItem(new LiItem() { Text = pLink.FirstChild.ToString(), Url = pLink.Url });
+                    }
+
+                    //if (paragraph.Inline is ContainerInline pcontainerInline)
+                    //{
+                    //    if (pcontainerInline.Count() > 0)
+                    //    {
+                    //        foreach (var itemInline in pcontainerInline)
+                    //        {
+                    //            ListProcess(itemInline, root, containerLevel + 1);
+                    //        }
+                    //    }
+                    //}
+
+
                     break;
                 default:
                     //WrteLog($"{GetLevelSpace(containerLevel)}This is a LeafBlock {block.GetType().Name}");
                     break;
             }
+        }
+        LinkInline GetInlineLinks(Inline leafBlock)
+        {
+            if (!(leafBlock is LinkInline))
+                return null;
+
+            var link = leafBlock as LinkInline;
+            return link;
         }
         LinkInline GetLinks(LeafBlock leafBlock)
         {

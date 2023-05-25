@@ -26,7 +26,8 @@ namespace Niusys.Docs.Web.ServiceRegisters
                 // optional custom MarkdigPipeline (using MarkDig; for extension methods)
                 config.ConfigureMarkdigPipeline = builder =>
                 {
-                    builder.UseAdvancedExtensions();
+                    builder.UseAdvancedExtensions()
+                    .UseEmojiAndSmiley();
                     //builder.UseEmphasisExtras(Markdig.Extensions.EmphasisExtras.EmphasisExtraOptions.Default);
                     //.UseDiagrams();
                     //    .UsePipeTables()
