@@ -41,7 +41,7 @@ namespace Niusys.Docs.Web.Middlewares
                 return _next(context);
 
             var docRepName = pathSegments[0];
-            var docRep = _mkdocsDatabase.Get<DocProject>(x => x.Name == docRepName);
+            var docRep = _mkdocsDatabase.Get<DocProject>(x => x.RequestPath == docRepName);
             if (docRep == null)
                 return _next(context);
 

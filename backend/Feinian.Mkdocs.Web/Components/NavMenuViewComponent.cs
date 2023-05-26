@@ -9,6 +9,7 @@ using Niusys.Docs.Web.Models;
 using Niusys.Docs.Web.MarkdownServices.Utilities;
 using Niusys.Docs.Core.ProjectHttpClients;
 using Niusys.Docs.Core.Models;
+using Niusys.Docs.Web.Controllers;
 
 namespace Niusys.Docs.Web.Components;
 
@@ -55,23 +56,12 @@ public class NavMenuViewComponent : ViewComponent
             string content = null;
             try
             {
+                options.ApplyDefaultCachePolicy();
                 var httpClient = _docProjectHttpClientFactory.CreateHttpClient(model.DocProject.HostType, _workContext);
                 content = await httpClient.GetMarkdownFile(model.DocProject, model.ViewName, relativePath);
 
                 var baseUrl = $"{_requestSession.HostWithScheme}/{model.DocProject.RequestPath}";
                 content = MarkdownUtilities.FixupMarkdownRelativePaths(content, baseUrl, inhirtQuery);
-                if (content.IsNotNullOrWhitespace())
-                {
-                    options.SlidingExpiration = TimeSpan.FromSeconds(30);
-                    options.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(2);
-                }
-                else
-                {
-                    options.SlidingExpiration = TimeSpan.FromSeconds(5);
-                    options.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
-                }
-                options.Size = 1;
-
             }
             catch (Exception ex)
             {

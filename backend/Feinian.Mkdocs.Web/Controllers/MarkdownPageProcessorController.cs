@@ -51,18 +51,15 @@ namespace Niusys.Docs.Web.Controllers
             {
                 var httpClient = AgileLabContexts.Context.RootServiceProvider.GetRequiredService<DocProjectHttpClientFactory>()
                     .CreateHttpClient(model.DocProject.HostType, _workContext);
-                options.Size = 1;
+                
                 try
                 {
-                    var result = await httpClient.GetAttachment(model.DocProject, model.ViewName, relativePath);
-                    options.SlidingExpiration = TimeSpan.FromMinutes(5);
-                    options.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
+                    options.ApplyDefaultCachePolicy();
+                    var result = await httpClient.GetAttachment(model.DocProject, model.ViewName, relativePath);                
                     return result;
                 }
                 catch (Exception ex)
                 {
-                    options.SlidingExpiration = TimeSpan.FromMinutes(30);
-                    options.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
                     return new Tuple<Stream, string>(null, ex.FullMessage());
                 }
             });
@@ -107,16 +104,17 @@ namespace Niusys.Docs.Web.Controllers
 
             var rawMarkdown = await _memoryCache.GetOrCreateAsync($"mem:mkpage:{model.DocProject.Name}:{model.ViewName}{relativePath}", async options =>
             {
+               
                 var httpClient = AgileLabContexts.Context.RootServiceProvider.GetRequiredService<DocProjectHttpClientFactory>()
                         .CreateHttpClient(model.DocProject.HostType, _workContext);
-                options.Size = 1;
                 try
                 {
                     var content = await httpClient.GetMarkdownFile(model.DocProject, model.ViewName, relativePath);
                     var baseUrl = $"{requestSession.HostWithScheme}/{model.RequestBasePath}/{model.RelativePath}";
 
                     content = MarkdownUtilities.FixupMarkdownRelativePaths(content, baseUrl, inhirtQuery);
-                    options.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(2);
+
+                    options.ApplyDefaultCachePolicy();
 
                     return content;
                 }
@@ -131,6 +129,16 @@ namespace Niusys.Docs.Web.Controllers
             // set title, raw markdown, yamlheader and rendered markdown
             MarkdownHelper.ParseMarkdownToModel(markdown, rawMarkdown, model);
             return View(MarkdownConfiguration.DefaultMarkdownViewTemplate, model);
+        }
+    }
+
+    public static class MemcacheEntryExtensions
+    {
+        public static void ApplyDefaultCachePolicy(this ICacheEntry options)
+        {
+            options.Size = 1;
+            options.SlidingExpiration = TimeSpan.FromSeconds(15);
+            options.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(2);
         }
     }
 }
