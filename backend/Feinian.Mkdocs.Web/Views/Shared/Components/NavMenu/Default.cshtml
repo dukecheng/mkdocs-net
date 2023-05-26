@@ -2,12 +2,46 @@
 @using AgileLabs;
 @using Niusys.Docs.Core;
 @model string
-@if (Model.IsNotNullOrWhitespace())
-{
-    <div class="left-container col-3 col-lg-2">
-        <ul class="nav-tree d-none">
+
+<nav class="navbar navbar-expand-lg">
+    <!-- Default Logo -->
+    <a class="navbar-expand-hide" href="~/" aria-label="Unify">
+        @*<img class="navbar-brand-logo" src="~/assets/svg/logos/logo.svg" alt="Image Description">*@
+        Article Navigation
+    </a>
+    <!-- End Default Logo -->
+    <!-- Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarNavDropdown" aria-controls="sidebarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-default">
+            <i class="bi-list"></i>
+        </span>
+        <span class="navbar-toggler-toggled">
+            <i class="bi-x"></i>
+        </span>
+    </button>
+    <!-- End Toggler -->
+    <!-- Collapse -->
+    <div class="collapse navbar-collapse" id="sidebarNavDropdown">
+@*        <ul class="navbar-nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="~/admin/" role="button" aria-expanded="false">Admin</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="~/jobs/" role="button" aria-expanded="false">Jobs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="~/swagger/" role="button" aria-expanded="false">API</a>
+            </li>
+        </ul>*@
+        <ul class="nav-tree d-none w-100">
             @Html.Raw(Model)
         </ul>
     </div>
-
-}
+    <!-- End Collapse -->
+</nav>
+@*@if (Model.IsNotNullOrWhitespace())
+{
+    <ul class="nav-tree d-none">
+        @Html.Raw(Model)
+    </ul>
+}*@

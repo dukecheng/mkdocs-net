@@ -14,36 +14,37 @@
         .primary-holder code {
             font-size: 14px;
         }
+
+        .left-container {
+            height: auto;
+        }
+    </style>
+    <style>
+        @@media (min-width: 992px) {
+            .navbar-expand-lg .navbar-expand-hide {
+                display: none;
+            }
+        }
     </style>
 }
 <!-- ========== MAIN CONTENT ========== -->
-<div class="main-wrapper row">
-    @await Component.InvokeAsync("NavMenu")
-    <div class="primary-holder col-7 col-lg-8">
-        @Model.RenderedMarkdown
-    </div>
-    <div class="right-container col-2 d-sm-none d-md-block">
-        <!-- Nav -->
-        <ul class="nav nav-segment" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="nav-one-eg1-tab" href="#nav-one-eg1" data-bs-toggle="pill" data-bs-target="#nav-one-eg1" role="tab" aria-controls="nav-one-eg1" aria-selected="true">Tags</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="nav-two-eg1-tab" href="#nav-two-eg1" data-bs-toggle="pill" data-bs-target="#nav-two-eg1" role="tab" aria-controls="nav-two-eg1" aria-selected="false">Branches</a>
-            </li>
-        </ul>
-        <!-- End Nav -->
-        <!-- Tab Content -->
-        <div class="tab-content">
-            <div class="tab-pane fade show active" id="nav-one-eg1" role="tabpanel" aria-labelledby="nav-one-eg1-tab">
-                @await Component.InvokeAsync("ViewList",new{viewMode=ViewMode.Tag})
+<div class="container-fluid">
+    <div class="main-wrapper row">
+        @if (Model.DocProject.IsUseNavMenu)
+        {
+            <div class="left-container col-12 col-md-2">
+                @await Component.InvokeAsync("NavMenu")
             </div>
-
-            <div class="tab-pane fade" id="nav-two-eg1" role="tabpanel" aria-labelledby="nav-two-eg1-tab">
-                @await Component.InvokeAsync("ViewList",new{viewMode=ViewMode.Branch})
-            </div>
+        }
+        <div class="primary-holder col">
+            @Model.RenderedMarkdown
         </div>
-        <!-- End Tab Content -->
+        @if (Model.DocProject.IsUseVersionViews)
+        {
+            <div class="right-container col-12 col-md-2">
+                @await Component.InvokeAsync("ViewList")
+            </div>
+        }
     </div>
 </div>
 <!-- ========== END MAIN CONTENT ========== -->

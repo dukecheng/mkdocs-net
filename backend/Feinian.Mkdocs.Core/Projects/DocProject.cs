@@ -2,7 +2,7 @@ using Niusys.Docs.Core.Configuration;
 
 namespace Niusys.Docs.Core.Projects
 {
-    public class DocProject : IConfig
+    public class DocProject
     {
         public long Id { get; set; }
 
@@ -24,7 +24,7 @@ namespace Niusys.Docs.Core.Projects
         /// <summary>
         /// Host类型
         /// </summary>
-        public HostType HostType { get; set; } = HostType.Gogs;
+        public HostType HostType { get; set; }
 
         /// <summary>
         /// Git项目地址
@@ -45,6 +45,21 @@ namespace Niusys.Docs.Core.Projects
         /// 默认分支或者tag
         /// </summary>
         public string DefaultView { get; set; }
+
+        /// <summary>
+        /// 是否使用导航菜单
+        /// </summary>
+        public bool IsUseNavMenu { get; set; }
+
+        /// <summary>
+        /// 是否使用版本视图
+        /// </summary>
+        public bool IsUseVersionViews { get; set; }
+
+        /// <summary>
+        /// 可见模式
+        /// </summary>
+        public VisiableMode VisiableMode { get; set; }
 
         /// <summary>
         /// 请求Git仓库时的头信息
