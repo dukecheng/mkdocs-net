@@ -34,12 +34,12 @@ namespace Niusys.Docs.Core.Projects
         /// <summary>
         /// Docs路径
         /// </summary>
-        public string WikiFolder { get; set; } = "docs";
+        public string WikiFolder { get; set; }
 
         /// <summary>
         /// 默认首页
         /// </summary>
-        public string IndexFile { get; set; } = "README.md";
+        public string IndexFile { get; set; }
 
         /// <summary>
         /// 默认分支或者tag

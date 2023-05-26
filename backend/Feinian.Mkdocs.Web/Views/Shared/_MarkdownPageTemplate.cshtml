@@ -18,13 +18,11 @@
 }
 <!-- ========== MAIN CONTENT ========== -->
 <div class="main-wrapper row">
-    <div class="left-container col-3 col-lg-2">
-        @await Component.InvokeAsync("NavMenu")
-    </div>
+    @await Component.InvokeAsync("NavMenu")
     <div class="primary-holder col-7 col-lg-8">
         @Model.RenderedMarkdown
     </div>
-    <div class="right-container col-md-2 d-sm-none d-md-block">
+    <div class="right-container col-2 d-sm-none d-md-block">
         <!-- Nav -->
         <ul class="nav nav-segment" role="tablist">
             <li class="nav-item">

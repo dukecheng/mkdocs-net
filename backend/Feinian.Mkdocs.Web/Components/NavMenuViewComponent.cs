@@ -90,6 +90,11 @@ public class NavMenuViewComponent : ViewComponent
             return content;
         });
 
+        if (rawMarkdown.IsNullOrEmpty())
+        {
+            return View("Default", string.Empty);
+        }
+
         //var markdown = Markdown.Parse(rawMarkdown, false, false, false);
         var doc = Markdig.Markdown.Parse(rawMarkdown);
 

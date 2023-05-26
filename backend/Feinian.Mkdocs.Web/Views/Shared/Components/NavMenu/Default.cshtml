@@ -1,6 +1,13 @@
 @using System.Net;
+@using AgileLabs;
 @using Niusys.Docs.Core;
 @model string
-<ul class="nav-tree d-none">
-    @Html.Raw(Model)
-</ul>
+@if (Model.IsNotNullOrWhitespace())
+{
+    <div class="left-container col-3 col-lg-2">
+        <ul class="nav-tree d-none">
+            @Html.Raw(Model)
+        </ul>
+    </div>
+
+}
