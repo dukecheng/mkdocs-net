@@ -45,7 +45,7 @@ public class ViewListViewComponent : ViewComponent
         //    }
         //    catch (Exception ex)
         //    {
-        //        _logger.LogError(ex, $"ViewList({viewMode})»ñÈ¡Ê§°Ü, {ex.FullMessage()}");
+        //        _logger.LogError(ex, $"ViewList({viewMode})ï¿½ï¿½È¡Ê§ï¿½ï¿½, {ex.FullMessage()}");
         //    }
 
         //    options.Size = 1;
@@ -61,7 +61,7 @@ public class ViewListViewComponent : ViewComponent
         //    options.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(10);
         //    return result;
         //});
-
+        await Task.CompletedTask;
         return View(viewList.Select(x => x.ViewName).ToList());
     }
 
