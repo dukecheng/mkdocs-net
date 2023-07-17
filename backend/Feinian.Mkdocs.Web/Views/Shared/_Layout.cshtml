@@ -26,7 +26,49 @@
 
 <body>
     @await Html.PartialAsync("_Header")
+    <style>
+        table {
+            table-layout: fixed;
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f2f2f2;
+        }
 
+            table th,
+            table td {
+                border: 1px solid #ccc;
+                padding: 10px;
+            }
+
+            table th {
+                background-color: #e0e0e0;
+                font-weight: bold;
+            }
+
+            table td {
+                background-color: #fff;
+            }
+
+            table tr:nth-child(even) td {
+                background-color: #f9f9f9;
+            }
+
+            table th:first-child,
+            table td:first-child {
+                border-left: none;
+            }
+
+            table th:last-child,
+            table td:last-child {
+                border-right: none;
+            }
+
+            table tr:last-child td {
+                border-bottom: none;
+            }
+    </style>
     <main id="content" role="main">
         @RenderBody()
     </main>
