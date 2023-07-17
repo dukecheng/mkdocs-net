@@ -27,7 +27,8 @@ namespace Niusys.Docs.Web.ServiceRegisters
                 config.ConfigureMarkdigPipeline = builder =>
                 {
                     builder.UseAdvancedExtensions()
-                    .UseEmojiAndSmiley();
+                    .UseEmojiAndSmiley()
+                    .UseTableOfContent();
                     //builder.UseEmphasisExtras(Markdig.Extensions.EmphasisExtras.EmphasisExtraOptions.Default);
                     //.UseDiagrams();
                     //    .UsePipeTables()

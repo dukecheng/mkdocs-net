@@ -112,7 +112,18 @@ namespace Niusys.Docs.Web.MarkdownServices.Utilities
             var uri = new Uri(basePath, UriKind.Absolute);
 
             markdown = LinkProcess(markdown, doc, uri, urlQuery);
+            markdown = AppendToc(markdown);
             return markdown;
+        }
+        private static string AppendToc(string markdown)
+        {
+            var result = markdown;
+            if (!result.Contains("[TOC]"))
+            {
+                string toc = "[TOC]";
+                result = toc + Environment.NewLine + markdown;
+            }
+            return result;
         }
 
         public static string LinkProcess(string markdown, Block block, Uri uri, Dictionary<string, string> urlQuery)
