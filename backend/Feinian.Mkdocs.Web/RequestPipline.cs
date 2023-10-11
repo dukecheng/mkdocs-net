@@ -1,5 +1,6 @@
+using AgileLabs;
 using AgileLabs.AppRegisters;
-using AgileLabs.ClientAppService;
+using AgileLabs.AspNet.ClientAppServices;
 using AgileLabs.WebApp.Hosting;
 
 namespace Niusys.Docs.Web

@@ -1,15 +1,15 @@
 using AgileLabs;
-using AgileLabs.AspNet.Sessions;
-using Markdig.Syntax.Inlines;
+using AgileLabs.Sessions;
 using Markdig.Syntax;
+using Markdig.Syntax.Inlines;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using System.Text;
-using Niusys.Docs.Web.Models;
-using Niusys.Docs.Web.MarkdownServices.Utilities;
-using Niusys.Docs.Core.ProjectHttpClients;
 using Niusys.Docs.Core.Models;
+using Niusys.Docs.Core.ProjectHttpClients;
 using Niusys.Docs.Web.Controllers;
+using Niusys.Docs.Web.MarkdownServices.Utilities;
+using Niusys.Docs.Web.Models;
+using System.Text;
 
 namespace Niusys.Docs.Web.Components;
 
@@ -20,13 +20,13 @@ public class NavMenuViewComponent : ViewComponent
     private readonly IMemoryCache _memoryCache;
     private readonly ILogger<NavMenuViewComponent> _logger;
     private readonly DocProjectHttpClientFactory _docProjectHttpClientFactory;
-    private readonly IWorkContext _workContext;
+    private readonly IWorkContextCore _workContext;
 
     public NavMenuViewComponent(IRequestSession requestSession,
                                 IMemoryCache memoryCache,
                                 ILogger<NavMenuViewComponent> logger,
                                 DocProjectHttpClientFactory docProjectHttpClientFactory,
-                                IWorkContext workContext)
+                                IWorkContextCore workContext)
     {
         _requestSession = requestSession;
         _memoryCache = memoryCache;

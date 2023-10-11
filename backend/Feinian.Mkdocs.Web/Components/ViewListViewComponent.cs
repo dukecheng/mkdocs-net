@@ -14,11 +14,11 @@ public class ViewListViewComponent : ViewComponent
     private readonly IMemoryCache _memoryCache;
     private readonly ILogger<ViewListViewComponent> _logger;
     private readonly DocProjectHttpClientFactory _docProjectHttpClientFactory;
-    private readonly IWorkContext _workContext;
+    private readonly IWorkContextCore _workContext;
     private readonly MkdocsDatabase _mkdocsDatabase;
 
     public ViewListViewComponent(IMemoryCache memoryCache, ILogger<ViewListViewComponent> logger,
-                                DocProjectHttpClientFactory docProjectHttpClientFactory, IWorkContext workContext, MkdocsDatabase mkdocsDatabase)
+                                DocProjectHttpClientFactory docProjectHttpClientFactory, IWorkContextCore workContext, MkdocsDatabase mkdocsDatabase)
     {
         _memoryCache = memoryCache;
         _logger = logger;

@@ -12,9 +12,9 @@ namespace Niusys.Docs.Core
     {
         private readonly MkdocsDatabase _mkdocsDatabase;
         private readonly DocProjectHttpClientFactory _projectHttpClientFactory;
-        private readonly IWorkContext _workContext;
+        private readonly IWorkContextCore _workContext;
 
-        public DocProjectService(MkdocsDatabase mkdocsDatabase, DocProjectHttpClientFactory projectHttpClientFactory, IWorkContext workContext)
+        public DocProjectService(MkdocsDatabase mkdocsDatabase, DocProjectHttpClientFactory projectHttpClientFactory, IWorkContextCore workContext)
         {
             _mkdocsDatabase = mkdocsDatabase;
             _projectHttpClientFactory = projectHttpClientFactory;

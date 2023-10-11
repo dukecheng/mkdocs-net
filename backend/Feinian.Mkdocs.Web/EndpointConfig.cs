@@ -1,4 +1,4 @@
-﻿using AgileLabs.AppRegisters;
+﻿using AgileLabs;
 using AgileLabs.WebApp.Hosting;
 
 namespace Niusys.Docs.Web

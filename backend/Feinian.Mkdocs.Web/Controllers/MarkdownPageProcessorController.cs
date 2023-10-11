@@ -1,5 +1,5 @@
 using AgileLabs;
-using AgileLabs.AspNet.Sessions;
+using AgileLabs.Sessions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Niusys.Docs.Core.ProjectHttpClients;
@@ -21,12 +21,12 @@ namespace Niusys.Docs.Web.Controllers
 
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly IMemoryCache _memoryCache;
-        private readonly IWorkContext _workContext;
+        private readonly IWorkContextCore _workContext;
 
         public MarkdownPageProcessorController(
             IWebHostEnvironment hostingEnvironment,
             MarkdownConfiguration config,
-            IMemoryCache memoryCache, IWorkContext workContext)
+            IMemoryCache memoryCache, IWorkContextCore workContext)
         {
             MarkdownProcessorConfig = config;
             _memoryCache = memoryCache;

@@ -7,7 +7,7 @@ namespace Niusys.Docs.Core.ProjectHttpClients
 {
     public class DocProjectHttpClientFactory : ISingleton
     {
-        public DocProjectHttpClient CreateHttpClient(HostType hostType, IWorkContext workContext)
+        public DocProjectHttpClient CreateHttpClient(HostType hostType, IWorkContextCore workContext)
         {
             Type type = typeof(NullDocProjectHttpClient);
             switch (hostType)

@@ -1,7 +1,7 @@
 using AgileLabs;
-using AgileLabs.AspNet.Securities;
-using AgileLabs.AspNet.Sessions;
-using AgileLabs.AspNet.WebApi.Exceptions;
+using AgileLabs.AspNet.WebApis.Exceptions;
+using AgileLabs.Securities;
+using AgileLabs.Sessions;
 using AgileLabs.Utils;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;

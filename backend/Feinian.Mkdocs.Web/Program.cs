@@ -2,6 +2,7 @@ using AgileLabs;
 using AgileLabs.WebApp;
 using AgileLabs.WebApp.Hosting;
 using Hangfire;
+using Microsoft.AspNetCore.Mvc;
 using Niusys.Docs.Core;
 using Niusys.Docs.Core.Configuration;
 using Niusys.Docs.Core.DataStores;
@@ -12,7 +13,8 @@ public class AppBuildOptions : DefaultMvcApplicationOptions
 {
     public AppBuildOptions()
     {
-        ConfigureWebApplicationBuilder += (buildContext, builder) =>
+        base.MvcBuilderCreateFunc = (IServiceCollection serviceCollection, Action<MvcOptions> action) => serviceCollection.AddControllersWithViews(action);
+        ConfigureWebApplicationBuilder += (builder, buildContext) =>
         {
             builder.Configuration.AddJsonFile(ConfigurationDefaults.AppSettingsFilePath, true, true);
             if (!string.IsNullOrEmpty(builder.Environment?.EnvironmentName))
