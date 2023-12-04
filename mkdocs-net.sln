@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{990DB888
 		global.json = global.json
 		NuGet.config = NuGet.config
 		README.MD = README.MD
+		README_cn.md = README_cn.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Feinian.Mkdocs.Web", "backend\Feinian.Mkdocs.Web\Feinian.Mkdocs.Web.csproj", "{B5538D30-C057-485C-BFA1-7BAA3D716980}"

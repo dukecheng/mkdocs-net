@@ -47,3 +47,38 @@ docker run -d -it --name mkdocs -p 6363:8080 \
 --restart=always \
 hub.feinian.net/feinian/mkdocs_net:latest
 ```
+
+## Apis
+* 名字;字符串;MKDocs 中的项目名称
+* 请求路径;字符串;mkdocs 中项目的请求路径
+* 主机;字符串;用于获取 Markdown 文件的项目的主机
+* 主机类型;int;项目主机类型（1：gogs，2：gitlab，3：github）
+* 项目路径;字符串;Git 仓库中项目的项目路径（对于 GitLab，它是 projectId）
+* 维基文件夹;字符串;git 存储库中项目的 wiki 文件夹
+* 索引文件;字符串;Wiki 文件夹中项目的索引文件
+* 默认视图;字符串;项目的默认视图，它是分支名称或标签名称
+* 是UseVersionViews;布尔值;是使用项目的版本视图，如果为 true，它将使用项目的版本视图，否则，它将使用 mkdocs 的版本视图
+* visiable模式;int;项目的可见模式，0：公共，1：私有，2：密码
+* 请求标头;数组;请求标头，它是字符串的键值对数组，作为 HTTP 标头发送到远程 API
+```json
+{
+  "id": "1731545948036927488",
+  "name": "mkdocs-net-official", 
+  "requestPath": "mkdocs-net-official",
+  "host": "https://raw.githubusercontent.com",
+  "hostType": 3,
+  "projectPath": "dukecheng/mkdocs-net",
+  "wikiFolder": "docs",
+  "indexFile": "README.md",
+  "defaultView": "master",
+  "isUseNavMenu": true,
+  "isUseVersionViews": false,
+  "visiableMode": 0,
+  "requestHeaders": [
+    {
+      "key": "string",
+      "value": "string"
+    }
+  ]
+}
+```
