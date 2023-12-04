@@ -21,7 +21,7 @@ namespace Niusys.Docs.Web.ServiceRegisters
             {
                 // Register the Swagger generator and the Swagger UI middlewares
                 app.UseOpenApi();
-                app.UseSwaggerUi3();
+                app.UseSwaggerUi();
             });
             return piplineActions;
         }
@@ -38,7 +38,8 @@ namespace Niusys.Docs.Web.ServiceRegisters
                 {
                     PropertyNamingPolicy = LowerUnderlineCaseJsonNamingPolicy.Instance
                 };
-                options.ApplySettings(JsonNetSerializerSettings.Instance, mvcJsonSetting);
+                //options.ApplySettings(, mvcJsonSetting);
+                //JsonNetSerializerSettings.Instance
             });
         }
 

@@ -3,7 +3,7 @@ kind: pipeline
 name: build-pipeline
 type: exec
 node:
-  runner_name: cn-build-01
+  runner_name: cn-build-02
 
 platform:
   os: linux
@@ -28,8 +28,8 @@ steps:
       HUB_PASSWORD: 
         from_secret: HUB_PASSWORD  
     commands: 
-      - docker run -t --rm --dns=8.8.8.8 -v /data/build_share/dotnet:/root/.dotnet -v /data/build_share/nuget:/root/.nuget -v `pwd`:/src
-        --workdir /src mcr.microsoft.com/dotnet/sdk:7.0 bash -c "dotnet publish backend/Feinian.Mkdocs.Web/Feinian.Mkdocs.Web.csproj -c Release -o ./backend/Feinian.Mkdocs.Web/obj/Docker/publish"
+      - docker run -t --rm -v /data/build_share/dotnet:/root/.dotnet -v /data/build_share/nuget:/root/.nuget -v `pwd`:/src
+        --workdir /src hub.feinian.net/dotnet/sdk:8.0 bash -c "dotnet publish backend/Feinian.Mkdocs.Web/Feinian.Mkdocs.Web.csproj -c Release -o ./backend/Feinian.Mkdocs.Web/obj/Docker/publish"
 
       # 输出版本号
       - export IMAGE_VERSION=$(date +'%y%m%d_%H%M%S')

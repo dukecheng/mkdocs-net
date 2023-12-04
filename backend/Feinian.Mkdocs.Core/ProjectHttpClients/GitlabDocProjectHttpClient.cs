@@ -1,4 +1,5 @@
 using System.Net;
+using System.Web;
 using AgileLabs;
 using Newtonsoft.Json;
 using Niusys.Docs.Core.ProjectHttpClients.Abstract;
@@ -14,14 +15,18 @@ namespace Niusys.Docs.Core.ProjectHttpClients
 
         public override async Task<string> GetMarkdownFile(DocProject project, string viewName, string relativePath)
         {
-            var remotePath = $"{project.ProjectPath}/raw/{viewName}/{project.WikiFolder}/{relativePath}";
+            //var remotePath = $"{project.ProjectPath}/-/raw/{viewName}/{project.WikiFolder}/{relativePath}";
+            var remotePath = $"api/v4/projects/{project.ProjectPath}/repository/files/{HttpUtility.UrlEncode($"{project.WikiFolder}/{relativePath}")}/raw?ref={viewName}";
             var result = await GetMarkdownContentAsync($"{project.Host}/{remotePath}", project.RequestHeaders);
             return result;
         }
 
         public override async Task<Tuple<Stream, string>> GetAttachment(DocProject project, string viewName, string relativePath)
         {
-            var remotePath = $"{project.ProjectPath}/raw/{viewName}/{project.WikiFolder}/{relativePath}";
+            //http://192.168.100.155/quantum-scm/framework/framework.netcore/-/raw/dev/docs/navmenu.md
+            // http://192.168.100.155/api/v4/projects/325/repository/files/docs%2Fnavmenu.md/raw?ref=dev
+            //var remotePath = $"{project.ProjectPath}/-/raw/{viewName}/{project.WikiFolder}/{relativePath}";
+            var remotePath = $"api/v4/projects/{project.ProjectPath}/repository/files/{HttpUtility.UrlEncode($"{project.WikiFolder}/{relativePath}")}/raw?ref={viewName}";
             return await GetStreamContentAsync($"{project.Host}/{remotePath}", project.RequestHeaders);
         }
 

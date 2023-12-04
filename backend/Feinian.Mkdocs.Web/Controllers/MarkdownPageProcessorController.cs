@@ -51,11 +51,11 @@ namespace Niusys.Docs.Web.Controllers
             {
                 var httpClient = AgileLabContexts.Context.RootServiceProvider.GetRequiredService<DocProjectHttpClientFactory>()
                     .CreateHttpClient(model.DocProject.HostType, _workContext);
-                
+
                 try
                 {
                     options.ApplyDefaultCachePolicy();
-                    var result = await httpClient.GetAttachment(model.DocProject, model.ViewName, relativePath);                
+                    var result = await httpClient.GetAttachment(model.DocProject, model.ViewName, relativePath);
                     return result;
                 }
                 catch (Exception ex)
@@ -104,7 +104,7 @@ namespace Niusys.Docs.Web.Controllers
 
             var rawMarkdown = await _memoryCache.GetOrCreateAsync($"mem:mkpage:{model.DocProject.Name}:{model.ViewName}{relativePath}", async options =>
             {
-               
+
                 var httpClient = AgileLabContexts.Context.RootServiceProvider.GetRequiredService<DocProjectHttpClientFactory>()
                         .CreateHttpClient(model.DocProject.HostType, _workContext);
                 try
@@ -120,6 +120,7 @@ namespace Niusys.Docs.Web.Controllers
                 }
                 catch (Exception ex)
                 {
+                    options.AbsoluteExpiration = DateTime.Now;
                     return ex.FullMessage();
                 }
             });

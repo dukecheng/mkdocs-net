@@ -1,6 +1,6 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:7.0
+﻿FROM hub.feinian.net/dotnet/aspnet:8.0
 ARG source
 WORKDIR /app
-EXPOSE 80
+EXPOSE 8080
 COPY ${source:-.} .
 ENTRYPOINT ["dotnet", "Feinian.Mkdocs.Web.dll"]

@@ -45,7 +45,15 @@ namespace Niusys.Docs.Core.ProjectHttpClients.Abstract
             {
                 return responseMessage;
             }
-            throw new Exception($"{responseMessage.StatusCode} {url}");
+            switch (responseMessage.StatusCode)
+            {
+                case System.Net.HttpStatusCode.Found:
+                    var redirectUrl = responseMessage.Headers.Location.ToString();
+                    throw new Exception($"required redirect to {redirectUrl}");
+                default:
+                    throw new Exception($"RemoteRequestError: {(int)responseMessage.StatusCode}[{responseMessage.StatusCode}] {url}");
+            }
+
         }
 
         public async Task<string> GetMarkdownContentAsync(string url, List<KeyValuePair<string, string>> headers = null)
